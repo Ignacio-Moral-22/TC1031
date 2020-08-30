@@ -49,17 +49,23 @@ public:
         for(int i=inicio; i<=final; i+=paso){
             if(elementos[i]==valor){
                 return i;
-            }
-            if(elementos[i]>valor){
-                return busqueda_ordenada_2(paso/4, i-paso, i);
+            } else if(elementos[i]>valor){
+                return busqueda_ordenada_2(paso/10, i-paso, i);
             }
         }
         return -1;
     }
-    T busqueda_binaria(T valor, T inicio, T final){
+    T busqueda_binaria(T inicio, T final){
         if(inicio==0 && final==100000) std::sort(elementos.begin(), elementos.end());
-        int i=(final-inicio)/2;
-        if()
+        int i=(final+inicio)/2;
+        if(elementos[i]==valor){
+            return i;
+        } else if (elementos[i]<valor){
+            return busqueda_binaria(i, final);
+        } else {
+            return busqueda_binaria(inicio, i);
+        }
+        return -1;
     }
 };
 
@@ -77,5 +83,7 @@ int main(){
     std::cin >> paso;
     p3 = b.busqueda_ordenada_2(paso, 0, 100000);
     std::cout << "El valor se encuentra en la posicion " << p3 << std::endl;
+    p4 = b.busqueda_binaria(0, 100000);
+    std::cout << "El valor se encuentra en la posicion " << p4 << std::endl;
     return 0;
 }
