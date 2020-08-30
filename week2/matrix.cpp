@@ -59,7 +59,7 @@ int m_log_n(int arr[5][6], int valor){//O(m log(n)), pues es un O(log(n)) en un 
             vector_log_n.push_back(arr[i][valor]); //Mete los valores de cada fila en un vector
         }
         sort(vector_log_n.begin(), vector_log_n.end()); //Organiza para que podamos usar busqueda binaria 
-        regreso=busqueda_binaria(vector_log_n, vector_log_n.front(), vector_log_n.back(), valor); //O(log_n)
+        regreso=busqueda_binaria(vector_log_n, 0, 6, 0); //O(log_n)
         if(regreso!=-1){
             i=i+1; //Si no lo encuentra, baja a la siguiente fila
         } else {
