@@ -5,12 +5,18 @@
 #include <algorithm>
 #include "mytimer.h"
 
+/*
+Ignacio Joaquin Moral
+A01028470
+*/
+
 template<class T> 
 class Busqueda{
 private:
     std::vector<T> elementos;
 
     T valor;
+    int paso=100000;
 
 public:
     Busqueda(T _valor){
@@ -45,13 +51,14 @@ public:
         return -1;
     }
 
-    T busqueda_ordenada_2(T paso, T inicio, T final){
+    T busqueda_ordenada_2(T inicio, T final){
+        paso=paso/10;
         if(inicio==0 && final==100000) std::sort(elementos.begin(), elementos.end());
         for(size_t i=inicio; i<=final; i+=paso){
             if(elementos[i]==valor){
                 return i;
             } else if(elementos[i]>valor){
-                return busqueda_ordenada_2(paso/10, i-paso, i);
+                return busqueda_ordenada_2(i-paso, i);
             } else if(i==final){
                 break;
             }
@@ -75,9 +82,9 @@ public:
 
 int main(){
     srand(time(NULL));
-    int numero = 50712, p1, p2, p3, p4, paso=10000;
-    //std::cout << "Dame un numero para buscar." << std::endl;
-    //std::cin >> numero;
+    int numero, p1, p2, p3, p4;
+    std::cout << "Dame un numero para buscar." << std::endl;
+    std::cin >> numero;
     Busqueda<int> b(numero);
 
     DECLARE_TIMING(t1);
@@ -94,11 +101,9 @@ int main(){
     std::cout << "El valor se encuentra en la posicion " << p2 << std::endl;
     SHOW_TIMING(t2, "Busqueda Ordenada 1: ");
 
-    //std::cout << "Dame un numero para cada paso" << std::endl;
-    //std::cin >> paso;
     DECLARE_TIMING(t3);
     START_TIMING(t3);
-    p3 = b.busqueda_ordenada_2(paso, 0, 100000);
+    p3 = b.busqueda_ordenada_2(0, 100000);
     STOP_TIMING(t3);
     std::cout << "El valor se encuentra en la posicion " << p3 << std::endl;
     SHOW_TIMING(t3, "Busqueda Ordenada 2: ");
