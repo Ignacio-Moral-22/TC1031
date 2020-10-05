@@ -28,7 +28,7 @@ public:
 template <class T>
 class LinkedList
 {
-private:
+protected:
     Node<T> *head;
 
 public:
@@ -160,72 +160,6 @@ public:
         return 1;
     };
 
-    void count(T searchFor){
-        int i=0;
-        Node<T> *ptr = head;
-         while (ptr->get_next() != NULL)
-        {
-            ptr = ptr->get_next();
-            if(ptr->get_val()==searchFor){
-                i++;
-            }
-        }
-        std::cout << "El valor " << searchFor << " aparece " << i << " veces." << std::endl;
-    }
-
-    void deleteList(){
-        Node<T> *current = head;
-        Node<T> *next;
-        while (current != NULL){
-            next = current->get_next();
-            free(current);
-            current = next;
-        }
-        head=NULL;
-    }
-
-    
-     void reverse(){ 
-        Node<T>* current = head; 
-        Node<T> *prev = NULL, *next = NULL; 
-  
-        while (current != NULL){ 
-            next = current->get_next(); 
-            current->set_next(prev); 
-            prev = current; 
-            current = next; 
-        } 
-        head = prev; 
-    }; 
-
-    void removeDuplicates(){ 
-        Node<T>* current = head; 
-        Node<T>* next_next; 
-        if (current == NULL) return; 
-        
-        while (current->get_next() != NULL){ 
-            if (current->get_val() == current->get_next()->get_val()){ 
-                next_next = current->get_next()->get_next(); 
-                free(current->get_next()); 
-                current->set_next(next_next); 
-            }else{ 
-                current = current->get_next(); 
-            } 
-        } 
-    }
-
-    void sortedInsert(Node<T>* newnode){
-        Node<T>* current = head;
-        Node<T>* pre = NULL;
-        while (current->get_next() != NULL){ 
-            if (current->get_val() >= newnode->get_val()){ 
-                pre -> set_next(newnode);
-            } else { 
-                pre = current;
-                current = current->get_next();
-            } 
-        } 
-    }
 };
 
 #endif
