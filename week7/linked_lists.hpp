@@ -178,7 +178,7 @@ public:
         Node<T> *next;
         while (current != NULL){
             next = current->get_next();
-            free(current);
+            delete current;
             current = next;
         }
         head=NULL;
@@ -206,7 +206,7 @@ public:
         while (current->get_next() != NULL){ 
             if (current->get_val() == current->get_next()->get_val()){ 
                 next_next = current->get_next()->get_next(); 
-                free(current->get_next()); 
+                delete current->get_next(); 
                 current->set_next(next_next); 
             }else{ 
                 current = current->get_next(); 
@@ -214,17 +214,30 @@ public:
         } 
     }
 
-    void sortedInsert(Node<T>* newnode){
-        Node<T>* current = head;
+    void sortedInsert(T val){
+        int pos = 0;
+        Node<T>* ptr = head;
+        while(ptr != NULL && ptr->get_val() < val){
+            ptr = ptr->get_next();
+            pos++;
+        }
+        insert_item(val, pos);
+    }
+
+    void sortedInsert(Node<T> *newnode){
+        if(is_empty()){
+            head = newnode;
+            newnode->set_next(NULL);
+            return;
+        }
+        Node<T>* ptr = head;
         Node<T>* pre = NULL;
-        while (current->get_next() != NULL){ 
-            if (current->get_val() >= newnode->get_val()){ 
-                pre -> set_next(newnode);
-            } else { 
-                pre = current;
-                current = current->get_next();
-            } 
-        } 
+        while(ptr != NULL){
+            pre = ptr;
+            ptr = ptr->get_next();
+        }
+        newnode->set_next(pre->get_next());
+        pre->set_next(newnode);
     }
 };
 

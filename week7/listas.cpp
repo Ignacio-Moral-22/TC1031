@@ -9,6 +9,7 @@ int main(){
     list.push(5);
     list.push(6);
     list.push(9);
+    list.print();
     list.insert_item(145673, 6);
     // list.delete_item(4);
     list.reverse();
@@ -17,12 +18,12 @@ int main(){
     list.print();
     Node<int> newnode(7, NULL);
     list.sortedInsert(newnode);
-    // int item;
-    // list.get_nth(5, item);
-    // std::cout << item << std::endl;
-    // list.deleteList();
-    // list.push(1);
-    // list.print();
+    int item;
+    list.get_nth(5, item);
+    std::cout << item << std::endl;
+    list.deleteList();
+    list.push(1);
+    list.print();
 
     list.count(5);
     return 0;
